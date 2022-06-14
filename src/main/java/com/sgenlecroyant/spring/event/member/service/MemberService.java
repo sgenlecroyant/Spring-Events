@@ -1,5 +1,7 @@
 package com.sgenlecroyant.spring.event.member.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +28,10 @@ public class MemberService implements OnMemberActionDef{
 	}
 
 	@Override
-	public Member fetchMemberById(String id) {
-		MemberResponse memberResponse = new MemberResponse();
-		return this.memberRepository.findById(id).get();
+	public MemberResponse fetchMemberById(String id) {
+		Member member = this.memberRepository.findById(id).get();
+		MemberResponse memberResponse = new MemberResponse(member.getFirstName(), member.getLastName());
+		return memberResponse;
 	}
 
 	@Override
@@ -37,8 +40,16 @@ public class MemberService implements OnMemberActionDef{
 	}
 
 	@Override
-	public void updateMember(String id, MemberRequest memberRequest) {
-		
+	public MemberResponse updateMember(String id, MemberRequest memberRequest) {
+		Optional<Member> fetchedMember = this.memberRepository.findById(id);
+		Member member = null;
+		if(fetchedMember.isPresent()) {
+			Member realMember = fetchedMember.get();
+			member = new Member(realMember.getFirstName(), realMember.getLastName(), realMember.getEmail());
+			member.setId(realMember.getId());
+			
+		}
+		return new MemberResponse(member.getFirstName(), member.getLastName());
 	}
 	
 

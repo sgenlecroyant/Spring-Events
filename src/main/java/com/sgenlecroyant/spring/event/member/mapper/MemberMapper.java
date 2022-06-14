@@ -12,5 +12,6 @@ public class MemberMapper {
 		Member member = new Member(memberRequest.getFirstName(), memberRequest.getLastName(), memberRequest.getEmail());
 		return member;
 	}
+	
 
 }
