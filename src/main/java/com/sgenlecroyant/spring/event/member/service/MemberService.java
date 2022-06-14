@@ -49,9 +49,9 @@ public class MemberService implements OnMemberActionDef{
 		Member member = null;
 		if(fetchedMember.isPresent()) {
 			Member realMember = fetchedMember.get();
-			member = new Member(realMember.getFirstName(), realMember.getLastName(), realMember.getEmail());
+			member = new Member(memberRequest.getFirstName(), memberRequest.getLastName(), memberRequest.getEmail());
 			member.setId(realMember.getId());
-			
+			this.memberRepository.save(member);
 		}
 		return new MemberResponse(member.getFirstName(), member.getLastName());
 	}

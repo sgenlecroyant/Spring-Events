@@ -43,7 +43,7 @@ public class MemberController {
 							  .body(new MemberResponse(savedMember.getFirstName(), savedMember.getLastName()));
 	}
 	
-	@PutMapping(value = "/api/members")
+	@PutMapping(value = "/api/members/{id}")
 	private ResponseEntity<MemberResponse> updateMember(@PathVariable String id, @RequestBody MemberRequest memberRequest){
 		MemberResponse memberResponse = this.memberService.updateMember(id, memberRequest);
 		return new ResponseEntity<MemberResponse>(memberResponse, HttpStatus.OK);
