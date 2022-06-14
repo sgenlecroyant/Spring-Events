@@ -1,16 +1,22 @@
 package com.sgenlecroyant.spring.event.member.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity(name = "members")
 @Table(name = "members")
 public class Member {
 	
+	@Id
 	private String id;
 	private String firstName;
 	private String lastName;
 	private String email;
+	
+	public Member() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public Member(String firstName, String lastName, String email) {
 		this.firstName = firstName;
