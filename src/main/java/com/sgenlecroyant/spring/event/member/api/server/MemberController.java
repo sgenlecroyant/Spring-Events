@@ -1,5 +1,7 @@
 package com.sgenlecroyant.spring.event.member.api.server;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +47,11 @@ public class MemberController {
 	private ResponseEntity<MemberResponse> updateMember(@PathVariable String id, @RequestBody MemberRequest memberRequest){
 		MemberResponse memberResponse = this.memberService.updateMember(id, memberRequest);
 		return new ResponseEntity<MemberResponse>(memberResponse, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/api/members")
+	private ResponseEntity<List<MemberResponse>> fetchMembers(){
+		return new ResponseEntity<List<MemberResponse>>(this.memberService.fetchMembers(), HttpStatus.OK);
 	}
 
 }
