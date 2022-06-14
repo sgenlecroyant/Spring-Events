@@ -1,15 +1,13 @@
-package com.sgenlecroyant.spring.event.member.api.request;
+package com.sgenlecroyant.spring.event.member.api.response;
 
-public class MemberRequest {
+public class MemberResponse {
 	
 	private String firstName;
 	private String lastName;
-	private String email;
 	
-	public MemberRequest(String firstName, String lastName, String email) {
+	public MemberResponse(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.email = email;
 	}
 
 	public String getFirstName() {
@@ -26,14 +24,6 @@ public class MemberRequest {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	
 }
