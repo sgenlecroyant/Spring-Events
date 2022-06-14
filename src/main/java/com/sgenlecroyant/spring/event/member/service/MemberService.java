@@ -1,6 +1,8 @@
 package com.sgenlecroyant.spring.event.member.service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +52,16 @@ public class MemberService implements OnMemberActionDef{
 			
 		}
 		return new MemberResponse(member.getFirstName(), member.getLastName());
+	}
+
+	@Override
+	public List<MemberResponse> fetchMembers() {
+		
+				List<MemberResponse> memberResponses = this.memberRepository.findAll()
+					.stream()
+					.map(this.memberMapper::mapToMemberResponse)
+					.collect(Collectors.toList());
+		return memberResponses;
 	}
 	
 

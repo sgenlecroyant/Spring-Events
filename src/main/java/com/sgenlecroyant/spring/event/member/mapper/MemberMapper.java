@@ -3,6 +3,7 @@ package com.sgenlecroyant.spring.event.member.mapper;
 import org.springframework.stereotype.Component;
 
 import com.sgenlecroyant.spring.event.member.api.request.MemberRequest;
+import com.sgenlecroyant.spring.event.member.api.response.MemberResponse;
 import com.sgenlecroyant.spring.event.member.entity.Member;
 
 @Component
@@ -13,5 +14,8 @@ public class MemberMapper {
 		return member;
 	}
 	
+	public MemberResponse mapToMemberResponse(Member member) {
+		return new MemberResponse(member.getFirstName(), member.getLastName());
+	}
 
 }
