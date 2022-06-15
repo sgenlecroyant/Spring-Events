@@ -17,7 +17,7 @@ public class AppEventPublisher {
 	@Async
 	public <T extends ApplicationEvent> void publish(T appEvent){
 		try {
-			TimeUnit.SECONDS.sleep(20);
+			TimeUnit.SECONDS.sleep(5);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
