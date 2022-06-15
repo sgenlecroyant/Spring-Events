@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sgenlecroyant.spring.event.events.MemberRegistrationEvent;
+import com.sgenlecroyant.spring.event.events.publisher.AppEventPublisher;
 import com.sgenlecroyant.spring.event.member.action.OnMemberActionDef;
 import com.sgenlecroyant.spring.event.member.api.request.MemberRequest;
 import com.sgenlecroyant.spring.event.member.api.response.MemberResponse;
@@ -23,11 +25,15 @@ public class MemberService implements OnMemberActionDef{
 	
 	@Autowired
 	private MemberMapper memberMapper;
+	
+	@Autowired
+	private AppEventPublisher appEventPublisher;
 
 	@Override
 	public Member saveMember(MemberRequest memberRequest) {
 		Member member = this.memberMapper.mapToMember(memberRequest);
 		member.setId(UUID.randomUUID().toString().replace("-", ""));
+		this.appEventPublisher.publish(new MemberRegistrationEvent(this, member));
 		return this.memberRepository.save(member);
 	}
 
